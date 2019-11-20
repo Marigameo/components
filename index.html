@@ -8,7 +8,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <style>
- 
+
+ .underline{
+  width: 5%;
+  text-align: center;
+ }
     a{
         text-decoration: none;
         color: blueviolet;
@@ -190,7 +194,7 @@
 
 /* start of 2nd div  */
 .container {
-  height: 85vh;
+  height: 70vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -202,8 +206,8 @@
 }
 .post .avatar:empty {
   float: left;
-  width: 26%;
-  height: 60%;
+  width: 15%;
+  height: 70%;
   background-color: #ccc;
   border-radius: 25%;
   margin: 8px;
@@ -213,7 +217,7 @@
 }
 .post .line:empty {
   float: left;
-  width: 60%;
+  width: 43%;
   height: 13px;
   margin-top: 12px;
   border-radius: 7px;
@@ -246,9 +250,6 @@
   }
 }
 @media only screen and (min-width:350px) and (max-width: 420px) {
-  .post .avatar:empty {
-    height: 44%;
-  }
  .post{
      width: 85%;
      height: 30%;
@@ -370,13 +371,13 @@
   margin: 10%;
 }
 .line{
-  width: 5%;
+  width: 100%;
   text-align: center;
 }
 </style>
 <body>
   <a href="#about"><h2 class="txt-center txt-underline">Content placeholder loading</h2></a>
-  <hr class="line">
+  <hr class="underline">
     <div class="timeline-wrapper">
         <div class="timeline-item">
             <div class="row" style="display: none">
@@ -468,7 +469,7 @@
               <div class="about" id="about">
                   <p>It is a effective frontend magic used by popular web apps to compromise users with effective web performance and UX</p>
                   <h4 class="txt-center">How it works?</h4>
-  <hr class="line">
+  <hr class="underline">
                   <p>Show a content placeholder instead of blank screen or loader to give a feel of progress.Once fully loaded replace it with actual content.</p>
                   <p class="txt-blue">Used widely by Facebook,Medium,LinkedIn,Quora etc.</p>
               </div>
@@ -494,7 +495,7 @@ let content1_line2 = document.createElement('p');
 content1_line2.innerText = "PWA,Firebase,Firestore";
 let img2 = document.createElement("img");
 img2.src = "images/pwa.png";
-img2.style.width = "70%";
+img2.style.width = "40%";
 img2.onload = function(){
     document.getElementsByClassName('avatar')[0].appendChild(img2);
     document.getElementById('line1').appendChild(content1);
@@ -512,7 +513,7 @@ let content2_line2 = document.createElement('p');
 content2_line2.innerText = "API,AJAX,Js";
 let img3 = document.createElement("img");
 img3.src = "images/git.png";
-img3.style.width = "70%";
+img3.style.width = "40%";
 img3.onload = function(){
     document.getElementById('line3').appendChild(content2);
     document.getElementById('line4').appendChild(content2_line2);
@@ -530,7 +531,7 @@ let content3_line2 = document.createElement('p');
 content3_line2.innerText = "JS,Firebase,SweetalertJS";
 let img4 = document.createElement("img");
 img4.src = "images/quickfix.png";
-img4.style.width = "70%";
+img4.style.width = "40%";
 img4.onload = function(){
     document.getElementById('line5').appendChild(content3);
     document.getElementById('line6').appendChild(content3_line2);
