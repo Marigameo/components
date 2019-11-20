@@ -18,17 +18,25 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <style>
-.container {
+.input {
     width: 50%;
     margin: 50px auto;
 }
+.space-10{
+    height: 10px;
+}
+.space-20{
+    height: 20px;
+}
 </style>
 <body>
+    <div class="space-20"></div>
   <div class="form-group has-search container">
       <h3 class="text-center">Debouncing</h3>
+      <div class="space-10"></div>
     <p class="text-justify alert alert-success">While developing a customer friendly web app,our focus should be more on performance.Debouncing is one such technique in javascript that can make web apps performant especially when you are about to perform costlier operations like API calls to some server.</p>
     <span class="fa fa-search form-control-feedback"></span>
-    <input type="text" class="form-control" placeholder="Search" onkeyup="betterFunction()">
+    <input type="text" class="form-control input" placeholder="Search" onkeyup="betterFunction()">
     <br>
     <div class="alert alert-primary" role="alert" id="status">
     Start typing something ..
