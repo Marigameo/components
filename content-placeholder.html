@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Content placeholder loading</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<style>
+ 
+    a{
+        text-decoration: none;
+        color: blueviolet;
+    }
+    .hireMe{
+    font-size: 20px;
+    line-height: 2em;
+    color:dodgerblue;
+  }
+    .txt-purple{
+      color: palevioletred;
+    }
+    .txt-blue{
+      color: rgb(47, 137, 252);
+    }
+    .txt-red{
+      color:brown;
+    }
+    /* start of first div */
+    .timeline-wrapper{
+        padding-top: 5%;
+        padding-bottom: 5%;
+    }
+    .timeline-item {
+    background: #fff;
+    border: 1px solid;
+    border-color: #e5e6e9 #dfe0e4 #d0d1d5;
+    border-radius: 3px;
+    padding: 12px;
+
+    margin: 0 auto;
+    max-width: 472px;
+    min-height: 200px;
+}
+.wrapper {
+    background: #fff;
+    border: 1px solid;
+    border-color: #e5e6e9 #dfe0e4 #d0d1d5;
+    border-radius: 3px;
+    padding: 12px;
+
+    margin: 0 auto;
+    max-width: 90%;
+    min-height: 100%;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
+    @keyframes placeHolderShimmer{
+    0%{
+        background-position: -468px 0
+    }
+    100%{
+        background-position: 468px 0
+    }
+}
+
+.animated-background {
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeHolderShimmer;
+    animation-timing-function: linear;
+    background: #f6f7f8;
+    background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+    background-size: 800px 104px;
+    height: 96px;
+    position: relative;
+}
+.background-masker {
+    background: #fff;
+    position: absolute;
+}
+
+/* Every thing below this is just positioning */
+
+.background-masker.header-top,
+.background-masker.header-bottom,
+.background-masker.subheader-bottom {
+    top: 0;
+    left: 40px;
+    right: 0;
+    height: 10px;
+}
+
+.background-masker.header-left,
+.background-masker.subheader-left,
+.background-masker.header-right,
+.background-masker.subheader-right {
+    top: 10px;
+    left: 40px;
+    height: 8px;
+    width: 10px;
+}
+
+.background-masker.header-bottom {
+    top: 18px;
+    height: 6px;
+}
+
+.background-masker.subheader-left,
+.background-masker.subheader-right {
+    top: 24px;
+    height: 6px;
+}
+
+
+.background-masker.header-right,
+.background-masker.subheader-right {
+    width: auto;
+    left: 300px;
+    right: 0;
+}
+
+.background-masker.subheader-right {
+    left: 230px;
+}
+
+.background-masker.subheader-bottom {
+    top: 30px;
+    height: 10px;
+}
+
+.background-masker.content-top,
+.background-masker.content-second-line,
+.background-masker.content-third-line,
+.background-masker.content-second-end,
+.background-masker.content-third-end,
+.background-masker.content-first-end {
+    top: 40px;
+    left: 0;
+    right: 0;
+    height: 6px;
+}
+
+.background-masker.content-top {
+    height:20px;
+}
+
+.background-masker.content-first-end,
+.background-masker.content-second-end,
+.background-masker.content-third-end{
+    width: auto;
+    left: 380px;
+    right: 0;
+    top: 60px;
+    height: 8px;
+}
+
+.background-masker.content-second-line  {
+    top: 68px;
+}
+
+.background-masker.content-second-end {
+    left: 420px;
+    top: 74px;
+}
+
+.background-masker.content-third-line {
+    top: 82px;
+}
+
+.background-masker.content-third-end {
+    left: 300px;
+    top: 88px;
+}
+
+/* end of 1st div  */
+
+/* start of 2nd div  */
+.container {
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.post {
+  width: 40%;
+  height: 25%;
+}
+.post .avatar:empty {
+  float: left;
+  width: 20%;
+  height: 60%;
+  background-color: #ccc;
+  border-radius: 25%;
+  margin: 8px;
+  background-image: linear-gradient(90deg, #ddd 0px, #e8e8e8 40px, #ddd 80px);
+  background-size: 600px;
+  animation: shine-avatar 1.6s infinite linear;
+}
+.post .line:empty {
+  float: left;
+  width: 60%;
+  height: 13px;
+  margin-top: 12px;
+  border-radius: 7px;
+  background-image: linear-gradient(90deg, #ddd 0px, #e8e8e8 40px, #ddd 80px);
+  background-size: 600px;
+  animation: shine-lines 1.6s infinite linear;
+}
+.post .avatar + .line {
+  margin-top: 4%;
+  width: 100px;
+}
+.post .line ~ .line:empty {
+  background-color: #ddd;
+}
+
+@keyframes shine-lines {
+  0% {
+    background-position: -100px;
+  }
+  40%, 100% {
+    background-position: 140px;
+  }
+}
+@keyframes shine-avatar {
+  0% {
+    background-position: -32px;
+  }
+  40%, 100% {
+    background-position: 208px;
+  }
+}
+@media only screen and (min-width:350px) and (max-width: 420px) {
+ .post{
+     width: 85%;
+     height: 30%;
+ }
+}
+@media only screen and (min-width:420px) and (max-width: 600px) {
+    .post{
+        width:70%;
+        height: 30%;
+
+    }
+}
+@media only screen and (min-width:600px) and (max-width: 768px) {
+    .post{
+        width: 55%;
+     height: 30%;
+
+    }
+}
+/* end of 2nd div  */
+
+.fpo {
+  position: relative;
+  margin: 25% auto;
+  display: block;
+}
+.pulsate {
+  background: linear-gradient(-45deg, #dddddd, #f0f0f0, #dddddd, #f0f0f0);
+  background-size: 400% 400%;
+  -webkit-animation: Gradient 2.25s ease infinite;
+  -moz-animation: Gradient 2.25s ease infinite;
+  animation: Gradient 2.25s ease infinite;
+}
+.block {
+  display: block;
+  width: 271px;
+  height: 16px;
+  color: black;
+}
+.block2 {
+  width: 78px;
+  height: 8px;
+  margin-bottom: 8px;
+}
+.block3 {
+  width: 131px;
+  height: 8px;
+  margin-bottom: 16px;
+}
+.circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  float: right;
+}
+#card {
+  box-sizing: border-box;
+  width: 335px;
+  background: #fff;
+  position: relative;
+  margin: auto;
+  top: 25%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+.card-image {
+  box-sizing: border-box;
+  display: block;
+  width: 335px;
+  height: 243px;
+  background: #fafafa;
+  padding: 16px;
+}
+.card-content {
+  clear: both;
+  box-sizing: border-box;
+  padding: 16px;
+  background: #fff;
+}
+@-webkit-keyframes Gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@-moz-keyframes Gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes Gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.txt-center{
+  text-align: center;
+}
+.about{
+  margin: 10%;
+}
+.line{
+  width: 5%;
+  text-align: center;
+}
+</style>
+<body>
+  <a href="#about"><h2 class="txt-center txt-underline">Content placeholder loading</h2></a>
+  <hr class="line">
+    <div class="timeline-wrapper">
+        <div class="timeline-item">
+            <div class="row" style="display: none">
+                <div class="col" id="load">
+                        
+                </div>
+                <div class="col">
+                        <div class="content">
+                                <h3>Mariappan S</h3>
+                                <p>Web Engineer | Tech Enthusiast | Tech Blogger</p>
+                                <p>+91 8072343371</p>
+                                <p><a href="https://wwww.marigameo.herokuapp.com/" target="_blank">Portfolio</a></p>
+                            </div>
+                </div>
+            </div>
+            
+            <div class="animated-background">
+                <div class="background-masker header-top" id="test"></div>
+                <div class="background-masker header-left"></div>
+                <div class="background-masker header-right"></div>
+                <div class="background-masker header-bottom"></div>
+                <div class="background-masker subheader-left"></div>
+                <div class="background-masker subheader-right"></div>
+                <div class="background-masker subheader-bottom"></div>
+                <div class="background-masker content-top"></div>
+                <div class="background-masker content-first-end"></div>
+                <div class="background-masker content-second-line"></div>
+                <div class="background-masker content-second-end"></div>
+                <div class="background-masker content-third-line"></div>
+                <div class="background-masker content-third-end"></div>
+            </div>
+        </div>
+    </div>
+    <div class="container wrapper">
+            <div class="post">
+               <div class="avatar"></div>
+                    <div id="col1">
+                            <div class="line" id="line1"></div>
+                            <div class="line" id="line2"></div>
+                    </div>
+            </div>
+          
+            <div class="post">
+              <div class="avatar"></div>
+              <div id="col2">
+                    <div class="line" id="line3"></div>
+                    <div class="line" id="line4"></div>
+              </div>
+            </div>
+          
+            <div class="post">
+              <div class="avatar"></div>
+              <div id="col3">
+                    <div class="line" id="line5"></div>
+                    <div class="line" id="line6"></div> 
+              </div>   
+            </div>
+          </div>
+          <div id="card">
+                <div class="card-image">
+                  <div class="block pulsate">
+                  </div>
+                  <svg class="fpo " width="84px" height="63px" x="50%" y="50%" viewBox="0 0 84 63" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+                      <title>Shape</title>
+                      <desc>Created with Sketch.</desc>
+                      <defs></defs>
+                      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-964.000000, -1012.000000)" fill-opacity="0.06">
+                          <g id="16---Workpaper-Loading-Copy" transform="translate(836.000000, 909.000000)" fill="#000000">
+                              <g id="Icons-/-Special-/-RTE-/-Image" transform="translate(100.000000, 67.000000)">
+                                  <g id="Icons-/-RTE-/-ImageSpecial">
+                                      <path d="M108.368088,36.5625 L30.8485565,36.5625 C29.319526,36.5625 28.0800018,37.8216991 28.0800018,39.375 L28.0800018,95.625 C28.0800018,97.1783009 29.319526,98.4375 30.8485565,98.4375 L108.368088,98.4375 C109.897118,98.4375 111.136642,97.1783009 111.136642,95.625 L111.136642,39.375 C111.136642,37.8216991 109.897118,36.5625 108.368088,36.5625 L108.368088,36.5625 Z M105.599533,42.1875 L105.599533,81.225 L96.7678436,68.68125 C96.2965986,68.0076728 95.5575991,67.5787153 94.747102,67.5082962 C93.936605,67.4378771 93.1366348,67.7331229 92.5596405,68.315625 L82.0668182,79.003125 L59.1154999,55.6875 C58.0356599,54.5970274 56.2916778,54.5970274 55.2118378,55.6875 L33.6171112,77.596875 L33.6171112,42.1875 L105.599533,42.1875 L105.599533,42.1875 Z M33.6171112,92.8125 L33.6171112,85.528125 L57.149826,61.621875 L80.1011444,84.9375 C81.1809844,86.0279726 82.9249665,86.0279726 84.0048065,84.9375 L94.1654022,74.64375 L105.599533,90.9 L105.599533,92.8125 L33.6171112,92.8125 L33.6171112,92.8125 Z M77.9139862,56.25 C77.9139862,53.1433983 80.3930345,50.625 83.4510956,50.625 C86.5091566,50.625 88.988205,53.1433983 88.988205,56.25 C88.988205,59.3566017 86.5091566,61.875 83.4510956,61.875 C80.3930345,61.875 77.9139862,59.3566017 77.9139862,56.25 L77.9139862,56.25 Z" id="Shape"></path>
+                                  </g>
+                              </g>
+                          </g>
+                      </g>
+                  </svg>
+                </div>
+                <div class="card-content">
+                  <div class="block2 pulsate">
+                  </div>
+                  <div class="block3 pulsate">
+                  </div>
+                  <div class="circle pulsate">
+                  </div>
+                  <div style="clear: both;"></div>
+                </div>
+              </div>
+              <div class="about" id="about">
+                  <p>It is a effective frontend magic used by popular web apps to compromise users with effective web performance and UX</p>
+                  <h4 class="txt-center">How it works?</h4>
+  <hr class="line">
+                  <p>Show a content placeholder instead of blank screen or loader to give a feel of progress.Once fully loaded replace it with actual content.</p>
+                  <p class="txt-blue">Used widely by Facebook,Medium,LinkedIn,Quora etc.</p>
+              </div>
+</body>
+<script>
+   setTimeout(function(){
+    var img1 = document.createElement("img");
+   img1.src = "mari.png";
+   img1.style.width = "85%";
+   img1.onload = function() {
+    $('.animated-background').hide();
+    document.getElementById("load").appendChild(img1);
+    $('.row').show();
+};
+
+//2nd section 
+let content1 = document.createElement('a');
+content1.href = "https://orderino-e49c6.firebaseapp.com/";
+content1.setAttribute('target',"_blank");
+content1.setAttribute('class','txt-purple');
+content1.innerText = "Orderino - Your order taking partner";
+let content1_line2 = document.createElement('p');
+content1_line2.innerText = "PWA,Firebase,Firestore";
+let img2 = document.createElement("img");
+img2.src = "pwa.png";
+img2.style.width = "70%";
+img2.onload = function(){
+    document.getElementsByClassName('avatar')[0].appendChild(img2);
+    document.getElementById('line1').appendChild(content1);
+    document.getElementById('line2').appendChild(content1_line2);
+    document.getElementsByClassName('post')[0].classList.add('row');
+    document.getElementsByClassName('avatar')[0].classList.add('col');
+    document.getElementById('col1').classList.add('col');
+}
+let content2 = document.createElement('a');
+content2.innerText = "GitFinder - Find gitty geeks"
+content2.href = "https://marigameo.github.io/Github-finder/";
+content2.setAttribute('target',"_blank");
+content2.setAttribute('class','txt-red');
+let content2_line2 = document.createElement('p');
+content2_line2.innerText = "API,AJAX,Js";
+let img3 = document.createElement("img");
+img3.src = "git.png";
+img3.style.width = "70%";
+img3.onload = function(){
+    document.getElementById('line3').appendChild(content2);
+    document.getElementById('line4').appendChild(content2_line2);
+    document.getElementsByClassName('avatar')[1].appendChild(img3);
+    document.getElementsByClassName('post')[1].classList.add('row');
+    document.getElementsByClassName('avatar')[1].classList.add('col');
+    document.getElementById('col2').classList.add('col');
+}
+let content3 = document.createElement('a');
+content3.innerText = "Quickfix - No more compromises"
+content3.href = "https://quickfix-networks.herokuapp.com/";
+content3.setAttribute('class','txt-blue');
+content3.setAttribute('target','_blank');
+let content3_line2 = document.createElement('p');
+content3_line2.innerText = "JS,Firebase,SweetalertJS";
+let img4 = document.createElement("img");
+img4.src = "quickfix.png";
+img4.style.width = "70%";
+img4.onload = function(){
+    document.getElementById('line5').appendChild(content3);
+    document.getElementById('line6').appendChild(content3_line2);
+    document.getElementsByClassName('avatar')[2].appendChild(img4);
+    document.getElementsByClassName('post')[2].classList.add('row');
+    document.getElementsByClassName('avatar')[2].classList.add('col');
+    document.getElementById('col3').classList.add('col');
+}
+
+let hireMe = document.createElement('a');
+hireMe.innerText = "Hire Me";
+hireMe.setAttribute('class','hireMe');
+hireMe.href = 'mailto:mariappangameo@gmail.com';
+
+let img5 = document.createElement("img");
+img5.src = "expert.jpg";
+img5.style.width = "100%";
+img5.onload = function(){
+    $('.pulsate').hide();
+    $('.fpo').hide();
+    document.getElementsByClassName('card-image')[0].appendChild(img5);
+    document.getElementsByClassName('card-content')[0].appendChild(hireMe);
+}
+
+   },2500)
+  
+
+</script>
+</html>
