@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My cart</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+        <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="localStorage.html">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Cart Page</li>
+                  <li class="breadcrumb-item"><!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">
+                      Read about this work
+                    </button>
+                    
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-scrollable" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalScrollableTitle">LocalStorage and sessionStorage - Simple cart application</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            Initially,I just thought of playing with sessionStorage and localStorage in JS.But this work gave some scope beyind that too.
+                            <ul>
+                                <li>LocalStorage</li>
+                                <li>sessionStorage</li>
+                                <li>Converting strings to object and vice versa</li>
+                                <li>Using array methods - like splice,unshift,indexOf etc</li>
+                                <li>for loop,for each loop</li>
+                                <li>working with dom</li>
+                                <li>event handlers</li>
+                            </ul>
+                            <br>In this I have used localStorage to persist items that are added to the cart.Those cart items are persisted and thus remains even if the application is closed and get back after some time like a real time database.Similarly I have used sessionStorage to keep track of items added to the cart,so that the add to cart button remains disabled once clicked(it's not that way it should be,just I thought of applying it this way :-- ).<br>So this storage gets lost if the current browser tab is closed.
+                            <br><br><b>So what is localStorage?</b>
+                            <br>LocalStorage is some sort of stoarge that our modern browsers provides,which makes data storage and retrieval like db's but really much faster than network requests.Localstorage data remains persistant event if the tab is closed,or the entire browser is closed.
+                            <br>It stores data as key value pairs and accepts only strings(to handle objects & arrays - use JSON.stringify and JSON.parse).
+                            <br><br><b>Who is using it?</b>
+                            <br>Top Indian startups like paytm,flipkart etc heavily uses it to store certain user bahaviours,navigation details etc.
+                            <br><br><b>Then what is sessionStorage?</b>
+                            <br>sessionStorage is more similar to localStorage expect that it persists the data until the current session is terminated.
+                            <br>Here a session denotes the current browser tab,once closed it clears the data.
+                            <br>But when we move to a different page and get back the data remains.In our case try moving to the cart page and return back to home (same tab) disabled buttons are still the way it should be.
+                            <br>This can be used in showing model on page load,popups etc.
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div></li>
+                </ol>
+              </nav>
+    <div id="cart" class="container">
+    <h3 style="padding: 20px">Cart Items</h3>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script>
+//get the cart items from localStorage and view them
+//get items
+let cartItems = JSON.parse(localStorage.getItem('cartItems'));
+let cart = document.getElementById('cart');
+
+//remove from cart
+function removeCartItem(id){
+    //get cartItems 
+    let cartItems = JSON.parse(localStorage.getItem('cartItems'));
+    let disabledItems = JSON.parse(sessionStorage.getItem('disabledItems'));
+    for(let i=0;i<cartItems.length;i++){
+        if(cartItems[i].id == id){
+            // console.log(disabledItems.indexOf(id));
+            let index = disabledItems.indexOf(id);
+            // console.log(index);
+            disabledItems.splice(index,1);
+            // console.log(disabledItems);
+           cartItems.splice(i,1);
+           localStorage.setItem('cartItems',JSON.stringify(cartItems));
+           sessionStorage.setItem('disabledItems',JSON.stringify(disabledItems));
+           location.href = 'cart.html';
+        }
+    };
+}
+
+//loop through the cartItems and list 
+cartItems.forEach(item => {
+    let list = document.createElement('ul');
+    list.setAttribute('class','list-group list-group-flush');
+    let listItem = document.createElement('li');
+    listItem.setAttribute('class','list-group-item list-group-item-action');
+    let elements = document.createElement('div');
+    let itemName = document.createElement('p');
+    let price = document.createElement('p');
+    let removeButton = document.createElement('button');
+    removeButton.setAttribute('class','btn btn-outline-danger');
+    removeButton.innerText = 'Remove item from cart';
+    removeButton.addEventListener('click',()=>{
+        removeCartItem(item.id);
+    });
+    itemName.innerText = item.itemName;
+    price.innerText = item.price+" ₹";
+    elements.appendChild(itemName);
+    elements.appendChild(price);
+    elements.appendChild(removeButton);
+    listItem.appendChild(elements);
+    list.appendChild(listItem);
+    cart.appendChild(list);
+});
+
+
+
+</script>
+</html>
