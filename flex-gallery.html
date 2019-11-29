@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Responsive Image Gallery - Flexbox</title>
+</head>
+<style>
+*{
+    box-sizing: border-box;
+}
+.text-center{
+    text-align: center;
+}
+body{
+    margin: 0;
+}
+.row{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 20px;
+    justify-content: center;
+    align-content: center;
+}
+.column{
+    margin:0 20px;
+    flex: 25%;
+    max-width: 25%;
+}
+.column img{
+    width: 100%;
+    margin-top: 8px;
+    vertical-align: middle;
+}
+@media (max-width: 800px) {
+  .column {
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media (max-width: 600px) {
+  .column {
+    flex: 100%;
+    max-width: 100%;
+  }
+}
+</style>
+<body>
+    <h2 class="text-center">Responsive image gallery using flexbox - responsive to different screen sizes</h2>
+    <h3 class="text-center"> -- With flexbox we can center things, arrange and align elements so easy and code looks clean. --</h3>
+    <div class="container">
+        <div class="row">
+            <div class="column">
+                <img src="images/1.jpg" alt="image 1">
+                <img src="images/12.jpg" alt="image5">
+
+                <img src="images/9.jpeg" alt="image 7">
+                <img src="images/10.jpg" alt="image 8">
+                <img src="images/new2.jpg" alt="new image 2">
+
+            </div>
+            <div class="column">
+                    <img src="images/3.jpg" alt="image 2">
+
+                <img src="images/8.jpg" alt="image 6">
+                <img src="images/4.jpg" alt="image 3">
+                <img src="images/11.jpeg" alt="image 9">                
+                <img src="images/new.jpg" alt="new image">
+            </div>
+            <div class="column">
+                <img src="images/6.jpg" alt="image5">
+                <img src="images/5.jpg" alt="image 4">
+                
+            </div>
+        </div>
+    </div>
+</body>
+</html>
