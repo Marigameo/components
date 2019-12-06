@@ -24,11 +24,20 @@
 .space-40{
     height: 40px;
 }
+#form{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+input{
+    padding: 8px;
+    margin: 10px;
+}
 </style>
 <body>
     <div class="container">
         <div class="space-40"></div>
-        <h3 class="txt-center">Event Delegation in JS</h3>
+        <h3 class="txt-center"><u>Event Delegation in JS</u></h3>
         <p class="txt-center">Here a single event listener is attached to the parent which takes care of all the inner div events - using bubbling</p>
         <p class="txt-center">Click on the div to view implementations</p>
         <div id="components" class="row">
@@ -40,6 +49,20 @@
             <div id="index" style="background-color: crimson;color:white">Placeholder loading</div>
             <div id="async" style="background-color: violet;">Fetch API,Asyn,await and Promises</div>
         </div>
+        <div class="space-40"></div>
+        <h3 class="txt-center"><u>Event Delegation - Populating specific input fields with uppercase characters onkeyup</u> </h3>
+            <p class="txt-center">Here fields with data-uppercase attributes(<b style="color: darkblue">in our case - firstname and lastname</b>) changes value to <span style="color: darkorchid">uppercase</span></p>
+            <p class="txt-center">Here the event handler is attached common to all fields in the form container - uses delegation</p>
+        <div id="form">
+            
+            <input type="text" id="firstname" placeholder="First Name" data-uppercase>
+            <input type="text" id="lastname" placeholder="Last Name" data-uppercase>
+            <input type="email" id="email" placeholder="Email">
+            <input type="text" id="mobileno" placeholder="Mobile No">
+            <input type="text" id="pan" placeholder="PAN No">
+            <input type="text" id="adhaar" placeholder="Adhaar No">
+        </div>
+
     </div>
 </body>
 <script src="js/delegation.js"></script>
