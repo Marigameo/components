@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Asynchronous JS - Async/await,promises,fetch api</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<style>
+ul li{
+    list-style: none;
+}
+.container{
+    padding-top: 40px;
+}
+.button-container{
+    display: flex;
+    justify-content: center;
+}
+
+</style>
+<body onload="getPosts()">
+<div id="container" class="container">
+</div>
+<div class="button-container">
+        <button id="fetch" class="btn btn-primary">Fetch random posts from API</button>
+</div>
+
+
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script>
+    let posts = [
+        {
+            title:'Async/Await',body:'It\'s is a better way of dealing promises'
+        },
+        {
+            title:'Promises',body:'Promises are objects that executes something that it promises,then either resolve or reject'
+        },
+        {
+            title:'Fetch API',body:'It\'s a asynchronous way to make API requests'
+        }];
+        
+        //get posts 
+        let getPosts = function(){
+            setTimeout(()=>{
+                if(document.querySelector('ul')){
+                    document.querySelector('ul').style.display = 'none';
+                }
+                let postDiv = document.createElement('ul');
+                posts.forEach(post => {
+                    let p = document.createElement('li');
+                    let pDiv = document.createElement('div');
+                    pDiv.setAttribute('class','alert alert-info');
+                    let title = document.createElement('h2');
+                    title.innerText = post.title;
+                    let body = document.createElement('p');
+                    body.innerText = post.body;
+                    pDiv.appendChild(title);
+                    pDiv.appendChild(body);
+                    p.appendChild(pDiv);
+                    postDiv.appendChild(p);
+                });
+                document.getElementById('container').appendChild(postDiv);
+            },1000)
+        }
+
+        async function fetchPosts(){
+    const res = await fetch('https://jsonplaceholder.typicode.com/posts');
+    const data = await res.json();
+    data.forEach((apiPost)=>{
+        posts.push({title:apiPost.title,body:apiPost.body});
+    getPosts();
+    document.getElementById('fetch').style.display = 'none';
+})
+}
+
+
+document.getElementById('fetch').addEventListener('click',fetchPosts);
+
+
+
+</script>
+</html>

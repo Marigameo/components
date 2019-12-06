@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Event Delegation in JS</title>
+</head>
+<style>
+
+#components{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+#components>div{
+    padding: 30px;
+    margin: 10px;
+    border: 1px solid black;
+}
+.txt-center{
+    text-align: center;
+}
+.space-40{
+    height: 40px;
+}
+</style>
+<body>
+    <div class="container">
+        <div class="space-40"></div>
+        <h3 class="txt-center">Event Delegation in JS</h3>
+        <p class="txt-center">Here a single event listener is attached to the parent which takes care of all the inner div events - using bubbling</p>
+        <p class="txt-center">Click on the div to view implementations</p>
+        <div id="components" class="row">
+            <div id="debouncing" style="background-color: blueviolet;color: whitesmoke">Debouncing</div>
+            <div id="throttling" style="background-color: coral;color: white">Throttling</div>
+            <div id="bubbling" style="background-color: bisque">Bubbling</div>
+            <div id="localStorage" style="background-color: cadetblue;">Local Storage and session Storage</div>
+            <div id="flex-gallery" style="background-color: cornflowerblue">Responsive Flexbox gallery</div>
+            <div id="index" style="background-color: crimson;color:white">Placeholder loading</div>
+            <div id="async" style="background-color: violet;">Fetch API,Asyn,await and Promises</div>
+        </div>
+    </div>
+</body>
+<script src="js/delegation.js"></script>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Event Bubbling and Capturing in JS</title>
+</head>
+<style>
+.div{
+    padding: 30px;
+    border: 1px solid black;
+    max-width: 90%;
+    max-height: 70%;
+}
+#grandParent,#ceo{
+    background-color: azure;
+}
+#parent,#manager{
+    background-color: lightblue;
+}
+#child,#engineer{
+    background-color: aquamarine;
+}
+#container{
+    display: flex;
+    justify-content: center;
+}
+.space-40{
+    height: 40px;
+}
+</style>
+<body>
+    <h3 style="text-align: center"><u>Bubbling Up</u> </h3>
+    <p style="text-align: center">Click any div to see the order of execution of event handlers attached to each div</p>
+    <div id="container">
+        <div id="grandParent" class="div">Grand Parent DIV
+            <div id="parent" class="div">Parent DIV
+                <div id="child" class="div">Child DIV</div>
+            </div>
+        </div>
+    </div>
+    <div id="result"></div>
+    <div class="space-40"></div>
+    <h3 style="text-align: center"><u>Capturing or Trickling down</u> </h3>
+    <p style="text-align: center">Now click any div to see how the order varied from bubbling</p>
+    <div id="container">
+        <div id="ceo" class="div">Grand Parent DIV
+            <div id="manager" class="div">Parent DIV
+                <div id="engineer" class="div">Child DIV</div>
+            </div>
+        </div>
+    </div>
+    <div id="res"></div>
+</body>
+<script src="js/bubbling.js"></script>
+</html>
