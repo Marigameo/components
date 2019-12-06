@@ -28,3 +28,9 @@ The main idea behind the flex layout is to give the container the ability to alt
 
 Flexbox layout is direction-agnostic as opposed to the regular layouts (block which is vertically-based and inline which is horizontally-based).
 Flexbox layout is most appropriate to the components of an application, and small-scale layouts, while the Grid layout is intended for larger scale layouts.
+
+5 . Event Delegation in JS
+
+6 . Bubbling and Capturing in JS
+
+7 . Async-await,Fetch API and Promises in JS
